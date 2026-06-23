@@ -12,19 +12,19 @@ export function NotificationCard({ notification }) {
       <CardContent>
         <Stack spacing={1}>
           <Chip
-            label={notification.type}
+            label={notification.Type}
             size="small"
           />
 
           <Typography variant="body1">
-            {notification.message}
+            {notification.Message}
           </Typography>
 
           <Typography
             variant="caption"
             color="text.secondary"
           >
-            {notification.timestamp}
+            {notification.Timestamp}
           </Typography>
         </Stack>
       </CardContent>

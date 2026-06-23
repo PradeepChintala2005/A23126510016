@@ -16,20 +16,24 @@ import { NotificationFilter } from "../components/NotificationFilter";
 import { useNotifications } from "../hooks/useNotifications";
 
 export function NotificationsPage() {
-  const [filter, setFilter] = useState();
-  const [page, setPage] = useState("1");
+  const [filter, setFilter] = useState("All");
+const [page, setPage] = useState(1);
 
-  const { notifications, totalPages, loading, error } = useNotifications();
+const { notifications, totalPages, loading, error } =
+  useNotifications(page, filter);
 
   const unreadCount = 2;
 
-  const handleFilterChange = (newFilter) => {
+ const handleFilterChange = (_, newFilter) => {
+  if (newFilter) {
+    setFilter(newFilter);
+    setPage(1);
+  }
+};
 
-  };
-
-  const handlePageChange = (_, newPage) => {
-
-  };
+const handlePageChange = (_, newPage) => {
+  setPage(newPage);
+};
 
   return (
     <Box sx={{ maxWidth: 720, mx: "auto", px: 2, py: 4 }}>
@@ -48,25 +52,25 @@ export function NotificationsPage() {
         <NotificationFilter value={filter} onChange={handleFilterChange} />
       </Box>
 
-      {true && (
-        <Box display="flex" justifyContent="center" py={6}>
-          <CircularProgress />
-        </Box>
-      )}
+      {loading && (
+  <Box display="flex" justifyContent="center" py={6}>
+    <CircularProgress />
+  </Box>
+)}
 
       {!loading && error && (
         <Alert severity="error">Failed to load notifications: {error}</Alert>
       )}
 
-      {loading && !error && notifications.length == "0" && (
+      {!loading && !error && notifications.length ===0 && (
         <Alert severity="info">Something message</Alert>
       )}
 
-      {loading && !error && notifications.length > 0 && (
+      {!loading && !error && notifications.length > 0 && (
         <Stack spacing={1.5}>
           {notifications.map((n) => (
   <NotificationCard
-    key={n.id}
+    key={n.ID}
     notification={n}
   />
 ))}
