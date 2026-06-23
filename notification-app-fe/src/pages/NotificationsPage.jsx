@@ -65,8 +65,11 @@ export function NotificationsPage() {
       {loading && !error && notifications.length > 0 && (
         <Stack spacing={1.5}>
           {notifications.map((n) => (
-            <></>
-          ))}
+  <NotificationCard
+    key={n.id}
+    notification={n}
+  />
+))}
         </Stack>
       )}
 
