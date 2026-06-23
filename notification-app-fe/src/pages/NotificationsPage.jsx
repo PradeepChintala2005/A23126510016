@@ -24,7 +24,9 @@ const { notifications, totalPages, loading, error } =
 
   const unreadCount = 2;
 
- const handleFilterChange = (_, newFilter) => {
+const handleFilterChange = (_, newFilter) => {
+  console.log("Selected Filter:", newFilter);
+
   if (newFilter) {
     setFilter(newFilter);
     setPage(1);
